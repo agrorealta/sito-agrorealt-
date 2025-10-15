@@ -1,0 +1,503 @@
+/* --- Impostazioni Generali e Variabili --- */
+:root {
+    --color-primary: #2c5f34; /* Verde più scuro e moderno */
+    --color-secondary: #6c3315;
+    --color-accent: #f2c14e;
+    --color-text: #333;
+    --color-light: #f9f9f9;
+    --color-background: #ffffff;
+    --font-main: 'Roboto', sans-serif;
+    --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Cursore Personalizzato al Passaggio del Mouse --- */
+a:hover,
+button:hover,
+.cta-button:hover,
+.social-icon:hover,
+.logo-link:hover {
+    cursor: url('immagini/foglia-cursore.png'), pointer; /* Usiamo 'pointer' come riserva */
+}
+
+
+body {
+    font-family: var(--font-main);
+    line-height: 1.7;
+    color: var(--color-text);
+    background-color: var(--color-light);
+}
+
+/* --- Header e Navigazione --- */
+header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    display: flex; /* Aggiunto per centrare il logo */
+    justify-content: center; /* Aggiunto per centrare il logo */
+    align-items: center; /* Aggiunto per centrare il logo */
+    flex-direction: column; /* Aggiunto per impilare logo e tagline */
+}
+
+/* Rimuoviamo la vecchia classe .logo testuale */
+/* .logo {
+    font-size: 2.5rem;
+    font-weight: bold;
+} */
+
+/* NUOVE REGOLE PER IL LOGO IMMAGINE */
+.logo-link {
+    display: block; /* Per far sì che l'immagine sia un blocco e si centri */
+    margin-bottom: 0.5rem; /* Spazio tra logo e tagline */
+}
+
+.site-logo {
+    max-width: 150px; /* Dimensione massima del logo */
+    height: auto;
+    filter: brightness(1.1); /* Leggero filtro per farlo risaltare sul verde */
+}
+
+/* Stile per il nuovo titolo sotto il logo */
+.site-title {
+    color: white;
+    font-size: 2.8rem; /* Dimensione del testo */
+    font-weight: 700;  /* Grassetto */
+    margin-top: 0.5rem; /* Piccolo spazio sopra */
+    margin-bottom: 0.25rem; /* Piccolo spazio sotto */
+    line-height: 1.2;
+}
+
+/* Leggera riduzione del titolo su schermi piccoli */
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 2.2rem;
+    }
+}
+
+.tagline {
+    font-style: italic;
+    opacity: 0.9;
+    color: white; /* Assicurati che la tagline rimanga bianca */
+}
+
+nav {
+    background-color: var(--color-secondary);
+    padding: 0.75rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+nav li {
+    margin: 0 1.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a:focus {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+/* --- Sezione Hero --- */
+.hero {
+    height: 60vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('immagini/palla_fieno.jpg') center/cover no-repeat;    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 1rem;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    text-wrap: pretty; /* Aggiungi questa riga magica */
+}
+
+/* --- Stili Contenuto Principale --- */
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+}
+
+.content-section {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.content-section h2 {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.section-intro {
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+}
+
+/* --- Sezione Pilastri --- */
+.pillars-section {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-bottom: 4rem;
+    text-align: center;
+    flex-wrap: wrap; /* Aggiunto per responsività */
+}
+
+.pillar {
+    flex-basis: 30%;
+    min-width: 250px; /* Per evitare che si rimpiccioliscano troppo */
+    padding: 1rem;
+}
+
+.pillar .icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+.pillar h3 {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+/* --- Griglia Articoli (Homepage e Pagina Articoli) --- */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.topic-card {
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--color-background);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.topic-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.topic-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.topic-content {
+    padding: 1.5rem;
+}
+
+.topic-content h3 {
+    color: var(--color-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.topic-content p {
+    margin-bottom: 1.5rem;
+}
+
+/* --- Bottoni (CTA) --- */
+.cta-button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #1e4224;
+}
+
+.cta-button.hero-cta {
+    font-size: 1.1rem;
+}
+
+.cta-button-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--color-primary);
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    border: 2px solid var(--color-primary);
+    transition: all 0.3s;
+    margin-top: 2rem;
+}
+
+.cta-button-secondary:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.text-center { text-align: center; }
+
+/* Stile per il pulsante disabilitato "Coming Soon" */
+.cta-disabled {
+    background-color: #cccccc; /* Un colore grigio */
+    pointer-events: none; /* Rende il pulsante non cliccabile */
+    cursor: default;
+}
+
+/* --- Sezione Social (versione a tinta unita) --- */
+.social-section.section-break {
+    background-color: #e8f0e9; /* Manteniamo questo verde chiarissimo */
+    padding: 4rem 1rem;
+    margin-top: 4rem;
+    text-align: center;
+}
+.social-section h2 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+.social-section p {
+    max-width: 600px;
+    margin: 0 auto 2.5rem; /* Aumentato lo spazio sotto */
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem; /* Aumentato lo spazio tra le icone */
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--color-secondary); /* Colore secondario per un look più caldo */
+    font-size: 2rem; /* Icone più grandi */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-5px); /* Effetto di sollevamento al passaggio del mouse */
+    color: var(--color-primary);
+}
+
+.social-icon span {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--color-secondary);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+.footer-links { margin-top: 1rem; margin-bottom: 1rem; }
+.footer-links a { color: white; text-decoration: none; margin: 0 1rem; opacity: 0.8; transition: opacity 0.3s; }
+.footer-links a:hover { opacity: 1; color: var(--color-accent); }
+.copyright { font-size: 0.9rem; opacity: 0.6; }
+
+/* --- Stili Pagina Articoli --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+.page-header h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+}
+
+.articles-page-grid {
+    display: grid;
+    gap: 3rem;
+}
+
+.article-full-card {
+    background-color: var(--color-background);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+}
+
+.article-image {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Proporzioni 16:9 */
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.article-content {
+    padding: 2rem;
+}
+.category-tag {
+    display: inline-block;
+    background-color: var(--color-accent);
+    color: var(--color-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+.article-content h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary); }
+.article-content p { font-size: 1.1rem; }
+
+/* --- Responsività --- */
+@media (max-width: 768px) {
+    nav ul { flex-direction: column; align-items: center; }
+    nav li { margin: 0.5rem 0; }
+    .hero h1 { font-size: 2.2rem; }
+    .hero p { font-size: 1.1rem; }
+    .pillars-section { flex-direction: column; gap: 2rem; }
+    
+    /* Regola il logo per schermi piccoli */
+    .site-logo {
+        max-width: 200px; /* Riduci la dimensione del logo su mobile */
+    }
+}
+
+
+/* --- Stile Migliorato per la Sezione Chi Siamo --- */
+.about-us-section {
+    background-color: white; /* Sfondo bianco pulito */
+    padding: 3rem 2rem;      /* Spazio interno per dare aria al testo */
+    border-radius: 10px;     /* Angoli arrotondati */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Ombra leggera per dare profondità */
+    max-width: 900px;        /* Larghezza massima della cornice */
+    margin: 4rem auto 0;     /* Centra la cornice nella pagina e aggiunge spazio sopra */
+    text-align: center;      /* Mantiene il testo centrato come piace a te */
+}
+
+.about-us-section h2 {
+    margin-bottom: 1.5rem; /* Aumenta lo spazio tra il titolo e il testo */
+}
+
+.about-us-section p {
+    text-align: center; /* Assicura che anche i paragrafi siano centrati */
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stile per gli articoli "Coming Soon" nella pagina articoli */
+.article-coming-soon {
+    opacity: 0.65; /* Rende il riquadro semi-trasparente */
+    transition: opacity 0.3s ease;
+}
+
+.article-coming-soon:hover {
+    opacity: 1; /* L'opacità torna normale per leggere meglio il testo al passaggio del mouse */
+}
+
+
+/* Stile per le icone social non attive */
+.social-inactive {
+    opacity: 0.4; /* Le rende semi-trasparenti */
+    cursor: default; /* Rimuove la manina del link */
+    pointer-events: none; /* Disattiva completamente il click */
+}
+
+.social-inactive:hover {
+    transform: none; /* Disattiva l'effetto di sollevamento al passaggio del mouse */
+    color: var(--color-secondary); /* Mantiene il colore originale senza evidenziarlo */
+}
+
+/* Stile per i riquadri "Coming Soon" nella homepage */
+.topic-coming-soon {
+    opacity: 0.65; /* Rende il riquadro semi-trasparente */
+    transition: opacity 0.3s ease;
+}
+
+.topic-coming-soon:hover {
+    opacity: 1; /* L'opacità torna normale al passaggio del mouse */
+}
+
+/* Scurisce il pulsante "Coming Soon" solo nel riquadro patinato per aumentare il contrasto */
+.topic-coming-soon .cta-disabled {
+    background-color: #999999; /* Un grigio più scuro e leggibile */
+    color: white; /* Assicura che il testo rimanga bianco */
+}
+
+/* --- Allineamento Pulsanti nella Homepage --- */
+
+/* Trasforma la card in un contenitore flessibile in colonna */
+.topic-card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Fa in modo che l'area del contenuto occupi tutto lo spazio verticale disponibile */
+.topic-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Questa è la magia: spinge il pulsante in fondo al suo contenitore */
+.topic-content .cta-button {
+    margin-top: auto;
+    align-self: flex-start; /* <-- Aggiungi questa riga! */
+}
