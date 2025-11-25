@@ -16,21 +16,16 @@
     box-sizing: border-box;
 }
 
-/* --- Cursore Personalizzato al Passaggio del Mouse --- */
-a:hover,
-button:hover,
-.cta-button:hover,
-.social-icon:hover,
-.logo-link:hover {
-    cursor: url('immagini/foglia-cursore.png'), pointer; /* Usiamo 'pointer' come riserva */
-}
-
-
 body {
     font-family: var(--font-main);
     line-height: 1.7;
     color: var(--color-text);
     background-color: var(--color-light);
+}
+
+/* --- Cursore Personalizzato --- */
+a:hover, button:hover, .cta-button:hover, .social-icon:hover, .logo-link:hover {
+    cursor: url('immagini/foglia-cursore.png'), pointer;
 }
 
 /* --- Header e Navigazione --- */
@@ -39,53 +34,27 @@ header {
     color: white;
     padding: 1.5rem 1rem;
     text-align: center;
-    display: flex; /* Aggiunto per centrare il logo */
-    justify-content: center; /* Aggiunto per centrare il logo */
-    align-items: center; /* Aggiunto per centrare il logo */
-    flex-direction: column; /* Aggiunto per impilare logo e tagline */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-/* Rimuoviamo la vecchia classe .logo testuale */
-/* .logo {
-    font-size: 2.5rem;
-    font-weight: bold;
-} */
+.logo-link { display: block; margin-bottom: 0.5rem; }
+.site-logo { max-width: 150px; height: auto; }
 
-/* NUOVE REGOLE PER IL LOGO IMMAGINE */
-.logo-link {
-    display: block; /* Per far sì che l'immagine sia un blocco e si centri */
-    margin-bottom: 0.5rem; /* Spazio tra logo e tagline */
-}
-
-.site-logo {
-    max-width: 150px; /* Dimensione massima del logo */
-    height: auto;
-    filter: brightness(1.1); /* Leggero filtro per farlo risaltare sul verde */
-}
-
-/* Stile per il nuovo titolo sotto il logo */
 .site-title {
     color: white;
-    font-size: 2.8rem; /* Dimensione del testo */
-    font-weight: 700;  /* Grassetto */
-    margin-top: 0.5rem; /* Piccolo spazio sopra */
-    margin-bottom: 0.25rem; /* Piccolo spazio sotto */
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
     line-height: 1.2;
 }
 
-/* Leggera riduzione del titolo su schermi piccoli */
-@media (max-width: 768px) {
-    .site-title {
-        font-size: 2.2rem;
-    }
-}
+.tagline { font-style: italic; opacity: 0.9; color: white; }
 
-.tagline {
-    font-style: italic;
-    opacity: 0.9;
-    color: white; /* Assicurati che la tagline rimanga bianca */
-}
-
+/* --- Navigazione Aggiornata (Due Righe) --- */
 nav {
     background-color: var(--color-secondary);
     padding: 0.75rem 0;
@@ -99,405 +68,415 @@ nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
+    flex-wrap: wrap; /* Permette di andare a capo */
+    align-items: center;
+    gap: 10px;
+    padding: 0.5rem 0;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+    margin: 0;
 }
 
 nav li {
-    margin: 0 1.5rem;
+    margin: 0.2rem 0.8rem;
 }
 
 nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    padding: 0.5rem 0;
-    border-bottom: 2px solid transparent;
+    color: white; text-decoration: none; font-weight: 500;
+    padding: 0.5rem 0; border-bottom: 2px solid transparent;
     transition: all 0.3s ease;
 }
+nav a:hover, nav a.active { color: var(--color-accent); border-bottom: 2px solid var(--color-accent); }
 
-nav a:hover, nav a:focus {
-    color: var(--color-accent);
-    border-bottom-color: var(--color-accent);
+/* Stile Bottone per le App */
+.app-link {
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.app-link i { font-size: 0.9rem; }
+
+.app-link:hover {
+    background-color: var(--color-accent);
+    color: var(--color-secondary) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border-color: var(--color-accent);
 }
 
 /* --- Sezione Hero --- */
 .hero {
     height: 60vh;
-	background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('immagini/palla_fieno.jpg') center/cover no-repeat;    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    color: white;
-    padding: 0 1rem;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('immagini/palla_fieno.jpg') center/cover no-repeat;
+    display: flex; justify-content: center; align-items: center; text-align: center; color: white; padding: 0 1rem;
 }
+.hero-content { max-width: 800px; }
+.hero h1 { font-size: 3rem; margin-bottom: 1rem; }
+.hero p { font-size: 1.25rem; margin-bottom: 2rem; text-wrap: pretty; }
 
-.hero-content {
-    max-width: 800px;
-}
+/* --- Contenuto Principale --- */
+main { max-width: 1100px; margin: 0 auto; padding: 4rem 1rem; }
+.content-section { margin-bottom: 4rem; text-align: center; }
+.content-section h2 { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1rem; }
+.section-intro { max-width: 800px; margin: 0 auto 2rem; font-size: 1.1rem; }
 
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
+/* --- Pilastri --- */
+.pillars-section { display: flex; justify-content: space-around; gap: 2rem; margin-bottom: 4rem; text-align: center; flex-wrap: wrap; }
+.pillar { flex-basis: 30%; min-width: 250px; padding: 1rem; }
+.pillar .icon { font-size: 2.5rem; color: var(--color-primary); margin-bottom: 1rem; }
+.pillar h3 { font-size: 1.5rem; color: var(--color-secondary); margin-bottom: 0.5rem; }
 
-.hero p {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    text-wrap: pretty; /* Aggiungi questa riga magica */
-}
-
-/* --- Stili Contenuto Principale --- */
-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 4rem 1rem;
-}
-
-.content-section {
-    margin-bottom: 4rem;
-    text-align: center;
-}
-
-.content-section h2 {
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-}
-
-.section-intro {
-    max-width: 800px;
-    margin: 0 auto 2rem;
-    font-size: 1.1rem;
-}
-
-/* --- Sezione Pilastri --- */
-.pillars-section {
-    display: flex;
-    justify-content: space-around;
-    gap: 2rem;
-    margin-bottom: 4rem;
-    text-align: center;
-    flex-wrap: wrap; /* Aggiunto per responsività */
-}
-
-.pillar {
-    flex-basis: 30%;
-    min-width: 250px; /* Per evitare che si rimpiccioliscano troppo */
-    padding: 1rem;
-}
-
-.pillar .icon {
-    font-size: 2.5rem;
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-}
-
-.pillar h3 {
-    font-size: 1.5rem;
-    color: var(--color-secondary);
-    margin-bottom: 0.5rem;
-}
-
-/* --- Griglia Articoli (Homepage e Pagina Articoli) --- */
-.articles-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-    text-align: left;
-}
-
+/* --- Card e Griglie --- */
+.articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem; text-align: left; }
 .topic-card {
-    border-radius: 8px;
-    overflow: hidden;
-    background-color: var(--color-background);
-    box-shadow: var(--box-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px; overflow: hidden; background-color: var(--color-background);
+    box-shadow: var(--box-shadow); transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex; flex-direction: column;
 }
+.topic-card:hover { transform: translateY(-8px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12); }
+.topic-image { width: 100%; height: 200px; object-fit: cover; }
+.topic-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+.topic-content h3 { color: var(--color-secondary); margin-bottom: 0.5rem; }
+.topic-content p { margin-bottom: 1.5rem; }
+.topic-content .cta-button { margin-top: auto; align-self: flex-start; }
 
-.topic-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
+.topic-coming-soon { opacity: 0.65; transition: opacity 0.3s ease; }
+.topic-coming-soon:hover { opacity: 1; }
+.topic-coming-soon .cta-disabled { background-color: #999; color: white; }
 
-.topic-image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
+/* --- Bottoni --- */
+.cta-button { display: inline-block; background-color: var(--color-primary); color: white; padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold; transition: background-color 0.3s; }
+.cta-button:hover { background-color: #1e4224; }
+.cta-button-secondary { display: inline-block; background-color: transparent; color: var(--color-primary); padding: 0.75rem 1.5rem; text-decoration: none; border-radius: 5px; font-weight: bold; border: 2px solid var(--color-primary); transition: all 0.3s; margin-top: 2rem; }
+.cta-button-secondary:hover { background-color: var(--color-primary); color: white; }
+.cta-disabled { background-color: #cccccc; pointer-events: none; cursor: default; }
+.full-width { width: 100%; margin-top: 1rem; cursor: pointer; text-align: center; }
 
-.topic-content {
-    padding: 1.5rem;
-}
+/* --- Chi Siamo --- */
+.about-us-section { background-color: white; padding: 3rem 2rem; border-radius: 10px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); max-width: 900px; margin: 4rem auto 0; text-align: center; }
+.about-us-section h2 { margin-bottom: 1.5rem; }
+.about-us-section p { text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
 
-.topic-content h3 {
-    color: var(--color-secondary);
-    margin-bottom: 0.5rem;
-}
+/* --- Social e Footer --- */
+.social-section.section-break { background-color: #e8f0e9; padding: 4rem 1rem; margin-top: 4rem; text-align: center; }
+.social-section h2 { color: var(--color-primary); margin-bottom: 1rem; font-size: 2.5rem; }
+.social-section p { max-width: 600px; margin: 0 auto 2.5rem; color: #333; font-size: 1.1rem; }
+.social-icons { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+.social-icon { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--color-secondary); font-size: 2rem; transition: transform 0.3s ease, color 0.3s ease; }
+.social-icon:hover { transform: translateY(-5px); color: var(--color-primary); }
+.social-icon span { font-size: 1rem; font-weight: 500; margin-top: 0.75rem; }
+.social-inactive { opacity: 0.4; cursor: default; pointer-events: none; }
+.social-inactive:hover { transform: none; color: var(--color-secondary); }
 
-.topic-content p {
-    margin-bottom: 1.5rem;
-}
-
-/* --- Bottoni (CTA) --- */
-.cta-button {
-    display: inline-block;
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    transition: background-color 0.3s;
-}
-
-.cta-button:hover {
-    background-color: #1e4224;
-}
-
-.cta-button.hero-cta {
-    font-size: 1.1rem;
-}
-
-.cta-button-secondary {
-    display: inline-block;
-    background-color: transparent;
-    color: var(--color-primary);
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-    border: 2px solid var(--color-primary);
-    transition: all 0.3s;
-    margin-top: 2rem;
-}
-
-.cta-button-secondary:hover {
-    background-color: var(--color-primary);
-    color: white;
-}
-
-.text-center { text-align: center; }
-
-/* Stile per il pulsante disabilitato "Coming Soon" */
-.cta-disabled {
-    background-color: #cccccc; /* Un colore grigio */
-    pointer-events: none; /* Rende il pulsante non cliccabile */
-    cursor: default;
-}
-
-/* --- Sezione Social (versione a tinta unita) --- */
-.social-section.section-break {
-    background-color: #e8f0e9; /* Manteniamo questo verde chiarissimo */
-    padding: 4rem 1rem;
-    margin-top: 4rem;
-    text-align: center;
-}
-.social-section h2 {
-    color: var(--color-primary);
-    margin-bottom: 1rem;
-    font-size: 2.5rem;
-}
-
-.social-section p {
-    max-width: 600px;
-    margin: 0 auto 2.5rem; /* Aumentato lo spazio sotto */
-    color: #333;
-    font-size: 1.1rem;
-}
-
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem; /* Aumentato lo spazio tra le icone */
-    flex-wrap: wrap;
-}
-
-.social-icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: var(--color-secondary); /* Colore secondario per un look più caldo */
-    font-size: 2rem; /* Icone più grandi */
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.social-icon:hover {
-    transform: translateY(-5px); /* Effetto di sollevamento al passaggio del mouse */
-    color: var(--color-primary);
-}
-
-.social-icon span {
-    font-size: 1rem;
-    font-weight: 500;
-    margin-top: 0.75rem;
-}
-
-/* --- Footer --- */
-footer {
-    background-color: var(--color-secondary);
-    color: white;
-    text-align: center;
-    padding: 3rem 1rem;
-}
+footer { background-color: var(--color-secondary); color: white; text-align: center; padding: 3rem 1rem; }
 .footer-links { margin-top: 1rem; margin-bottom: 1rem; }
 .footer-links a { color: white; text-decoration: none; margin: 0 1rem; opacity: 0.8; transition: opacity 0.3s; }
 .footer-links a:hover { opacity: 1; color: var(--color-accent); }
 .copyright { font-size: 0.9rem; opacity: 0.6; }
 
-/* --- Stili Pagina Articoli --- */
-.page-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-.page-header h1 {
-    font-size: 3rem;
-    color: var(--color-primary);
+/* --- Articoli Specifici --- */
+.article-full-card { background-color: var(--color-background); border-radius: 8px; overflow: hidden; box-shadow: var(--box-shadow); }
+.article-image { width: 100%; height: auto; max-height: 400px; object-fit: cover; }
+.video-container { position: relative; width: 100%; padding-top: 56.25%; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+.article-content { padding: 2rem; }
+.category-tag { display: inline-block; background-color: var(--color-accent); color: var(--color-secondary); padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem; font-weight: bold; margin-bottom: 1rem; }
+.article-coming-soon { opacity: 0.65; transition: opacity 0.3s ease; }
+.article-coming-soon:hover { opacity: 1; }
+
+/* --- APP MILLS & SEMINA (Layout Unificato) --- */
+.page-header { text-align: center; margin-bottom: 2rem; padding-top: 1rem; }
+
+/* Contenitore flessibile affiancato */
+.mills-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    display: flex;       
+    flex-direction: row; /* Affiancati */
+    align-items: flex-start;
+    gap: 2rem;           
 }
 
-.articles-page-grid {
-    display: grid;
-    gap: 3rem;
+.calculator-box {
+    flex: 0 0 350px; /* Larghezza fissa sinistra */
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-.article-full-card {
-    background-color: var(--color-background);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
-}
-
-.article-image {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: cover;
-}
-
-.video-container {
+.chart-box {
+    flex: 1; /* Prende il resto dello spazio a destra */
+    min-width: 0; 
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    min-height: 500px; /* Altezza minima per i grafici */
+    height: 550px; /* Altezza forzata per renderlo grande */
     position: relative;
-    width: 100%;
-    padding-top: 56.25%; /* Proporzioni 16:9 */
+    display: flex; flex-direction: column; align-items: center; justify-content: center; /* Centra contenuto per Semina */
 }
 
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
+/* Input Form */
+.input-group { margin-bottom: 1rem; text-align: left; }
+.input-group label { display: block; margin-bottom: 0.3rem; font-weight: bold; font-size: 0.95rem; color: var(--color-primary); }
+.input-group input, .input-group select { width: 100%; padding: 0.6rem; border: 2px solid #eee; border-radius: 5px; font-size: 1rem; background: white; }
+.result-box { margin-top: 1.5rem; padding: 1rem; background-color: #f9f9f9; border-radius: 5px; border-left: 5px solid #ccc; transition: all 0.3s; }
+.result-box.hidden { display: none; }
+
+/* Descrizione Tool */
+.tool-description { max-width: 800px; margin: 2rem auto; padding: 1.5rem; background-color: #f0fdf4; border-left: 5px solid var(--color-primary); border-radius: 5px; text-align: left; }
+
+/* --- SPECIFICO PER APP SEMINA (Grafico Visuale) --- */
+.field-grid {
+    width: 350px;
+    height: 350px;
+    background-color: #7c5e43; /* Colore terra */
+    /* Pattern terra */
+    background-image: repeating-linear-gradient(0deg, transparent, transparent 29px, rgba(0,0,0,0.1) 30px), repeating-linear-gradient(90deg, transparent, transparent 29px, rgba(0,0,0,0.1) 30px);
+    border: 4px solid #5a4231;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    padding: 5px;
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 4px;
 }
 
-.article-content {
-    padding: 2rem;
+.plant-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #4caf50; /* Verde pianta */
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    margin: 1px; /* Assicuriamoci che i pallini abbiano spazio */
 }
-.category-tag {
-    display: inline-block;
-    background-color: var(--color-accent);
-    color: var(--color-secondary);
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-}
-.article-content h2 { font-size: 2rem; margin-bottom: 1rem; color: var(--color-primary); }
-.article-content p { font-size: 1.1rem; }
 
-/* --- Responsività --- */
-@media (max-width: 768px) {
-    nav ul { flex-direction: column; align-items: center; }
-    nav li { margin: 0.5rem 0; }
-    .hero h1 { font-size: 2.2rem; }
-    .hero p { font-size: 1.1rem; }
-    .pillars-section { flex-direction: column; gap: 2rem; }
+.legend-field { margin-top: 10px; font-size: 0.9rem; color: #666; display: flex; align-items: center; gap: 5px; }
+.dot-legend { width: 8px; height: 8px; background-color: #4caf50; border-radius: 50%; display: inline-block; }
+
+/* --- Articoli Espandibili (Ticchiolatura/Peronospora) --- */
+.article-detail { max-width: 950px; margin: 4rem auto; padding: 0 1rem; }
+.expand-trigger { cursor: pointer; color: var(--color-primary); text-align: center; margin-bottom: 2rem; transition: color 0.3s; }
+.expand-trigger:hover { color: var(--color-secondary); }
+.expand-hint { display: block; font-size: 1rem; font-weight: normal; color: #666; margin-top: 0.5rem; text-decoration: underline; }
+.article-content-hidden { display: none; animation: fadeIn 0.5s ease-in-out; }
+.article-img-container { text-align: center; margin: 2rem 0; }
+.article-img { max-width: 70%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin-bottom: 0.5rem; }
+.caption { font-size: 0.9rem; color: #666; font-style: italic; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- Responsività Mobile --- */
+@media (max-width: 960px) {
+    .mills-container { flex-direction: column; }
+    .calculator-box { width: 100%; flex: none; }
+    .chart-box { width: 100%; min-height: 300px; height: 400px; }
+    .article-img { max-width: 100%; }
     
-    /* Regola il logo per schermi piccoli */
-    .site-logo {
-        max-width: 200px; /* Riduci la dimensione del logo su mobile */
-    }
+    /* Adattamento titolo header */
+    .site-title { font-size: 2.2rem; }
+    
+    /* Adattamento grafico semina */
+    .field-grid { width: 100%; max-width: 300px; height: 300px; }
 }
 
+/* --- STILE PER IL CALCOLATORE DI SEMINA (AGGIUNGI IN FONDO A STYLE.CSS) --- */
 
-/* --- Stile Migliorato per la Sezione Chi Siamo --- */
-.about-us-section {
-    background-color: white; /* Sfondo bianco pulito */
-    padding: 3rem 2rem;      /* Spazio interno per dare aria al testo */
-    border-radius: 10px;     /* Angoli arrotondati */
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); /* Ombra leggera per dare profondità */
-    max-width: 900px;        /* Larghezza massima della cornice */
-    margin: 4rem auto 0;     /* Centra la cornice nella pagina e aggiunge spazio sopra */
-    text-align: center;      /* Mantiene il testo centrato come piace a te */
-}
-
-.about-us-section h2 {
-    margin-bottom: 1.5rem; /* Aumenta lo spazio tra il titolo e il testo */
-}
-
-.about-us-section p {
-    text-align: center; /* Assicura che anche i paragrafi siano centrati */
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Stile per gli articoli "Coming Soon" nella pagina articoli */
-.article-coming-soon {
-    opacity: 0.65; /* Rende il riquadro semi-trasparente */
-    transition: opacity 0.3s ease;
-}
-
-.article-coming-soon:hover {
-    opacity: 1; /* L'opacità torna normale per leggere meglio il testo al passaggio del mouse */
-}
-
-
-/* Stile per le icone social non attive */
-.social-inactive {
-    opacity: 0.4; /* Le rende semi-trasparenti */
-    cursor: default; /* Rimuove la manina del link */
-    pointer-events: none; /* Disattiva completamente il click */
-}
-
-.social-inactive:hover {
-    transform: none; /* Disattiva l'effetto di sollevamento al passaggio del mouse */
-    color: var(--color-secondary); /* Mantiene il colore originale senza evidenziarlo */
-}
-
-/* Stile per i riquadri "Coming Soon" nella homepage */
-.topic-coming-soon {
-    opacity: 0.65; /* Rende il riquadro semi-trasparente */
-    transition: opacity 0.3s ease;
-}
-
-.topic-coming-soon:hover {
-    opacity: 1; /* L'opacità torna normale al passaggio del mouse */
-}
-
-/* Scurisce il pulsante "Coming Soon" solo nel riquadro patinato per aumentare il contrasto */
-.topic-coming-soon .cta-disabled {
-    background-color: #999999; /* Un grigio più scuro e leggibile */
-    color: white; /* Assicura che il testo rimanga bianco */
-}
-
-/* --- Allineamento Pulsanti nella Homepage --- */
-
-/* Trasforma la card in un contenitore flessibile in colonna */
-.topic-card {
+/* Griglia Visuale del Campo (1mq) */
+.field-grid {
+    width: 300px; /* Larghezza fissa */
+    height: 300px; /* Altezza fissa */
+    background-color: #7c5e43; /* Colore terra */
+    border: 4px solid #5a4231; /* Bordo scuro */
+    
+    /* Flexbox per gestire le FILE */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Le file sono una sotto l'altra */
+    justify-content: space-evenly; /* Spazia le file uniformemente */
+    
+    padding: 5px;
+    margin-top: 1rem;
+    overflow: hidden; /* Nasconde ciò che esce dai bordi */
+    border-radius: 4px;
 }
 
-/* Fa in modo che l'area del contenuto occupi tutto lo spazio verticale disponibile */
-.topic-content {
-    flex-grow: 1;
+/* Contenitore della singola Fila */
+.field-row {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Le piante stanno in riga */
+    justify-content: space-evenly; /* Spazia le piante uniformemente */
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Occupa l'altezza disponibile per la fila */
 }
 
-/* Questa è la magia: spinge il pulsante in fondo al suo contenitore */
-.topic-content .cta-button {
-    margin-top: auto;
-    align-self: flex-start; /* <-- Aggiungi questa riga! */
+/* Il "Pallino" Pianta */
+.plant-dot {
+    width: 8px; /* Dimensione pallino */
+    height: 8px;
+    background-color: #4caf50; /* Verde pianta */
+    border-radius: 50%; /* Lo rende rotondo */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3); /* Piccola ombra */
+}
+
+/* Legenda sotto il grafico */
+.legend-field {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot-legend {
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Stile per il menu a tendina delle colture */
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Griglia Visuale del Campo (10mx10m) */
+.field-grid {
+    width: 350px; /* Larghezza fissa */
+    height: 350px; /* Altezza fissa */
+    background-color: #7c5e43; /* Colore terra */
+    border: 4px solid #5a4231; /* Bordo scuro */
+    
+    /* Flexbox per gestire le FILE una sotto l'altra */
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-evenly; /* Spazia le file uniformemente */
+    
+    padding: 5px;
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+/* Contenitore della singola Fila */
+.field-row {
+    display: flex;
+    flex-direction: row; /* Le piante stanno in riga */
+    justify-content: space-evenly; /* Spazia le piante uniformemente */
+    align-items: center;
+    width: 100%;
+    /* Altezza automatica per adattarsi al numero di file */
+}
+
+/* Il "Pallino" Pianta */
+.plant-dot {
+    width: 6px; /* Dimensione pallino standard */
+    height: 6px;
+    background-color: #4caf50; /* Verde pianta */
+    border-radius: 50%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
+}
+
+/* Legenda */
+.legend-field {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #666;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.dot-legend {
+    width: 8px;
+    height: 8px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Stile specifico per il menu a tendina */
+select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #eee;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Stile per evidenziare il campo Ettari */
+.highlight-input label {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #2c5f34; /* Verde scuro */
+}
+
+.highlight-input input {
+    border: 2px solid #2c5f34; /* Bordo verde */
+    background-color: #f0fdf4; /* Sfondo verde chiarissimo */
+}
+
+.highlight-input input:focus {
+    outline: none;
+    border-color: #1e4224 !important; /* Verde ancora più scuro al click */
+    background-color: #fff;
+}
+
+/* Griglia Visuale del Campo (10mx10m) */
+.field-grid {
+    width: 350px;
+    height: 350px;
+    background-color: #7c5e43;
+    border: 4px solid #5a4231;
+    display: flex;
+    flex-direction: column; /* Le file vanno una sotto l'altra */
+    justify-content: space-evenly; /* Le distribuisce in tutto lo spazio */
+    padding: 5px;
+    margin-top: 1rem;
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+/* Contenitore della singola Fila */
+.field-row {
+    display: flex;
+    flex-direction: row; /* Le piante vanno una a fianco all'altra */
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    flex: 1; /* FONDAMENTALE: Occupa lo spazio verticale in modo equo */
+}
+
+/* Il "Pallino" Pianta */
+.plant-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #4caf50;
+    border-radius: 50%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3);
 }

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Densità Semina - AgroRealtà</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="immagini/logo-icona.png" alt="Icona AgroRealtà" class="site-logo">
+            </a>
+            <h1 class="site-title">AgroRealtà</h1>
+            <div class="tagline">L’agricoltura com’è, non come l’immagini</div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <!-- Gruppo Principale -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="articoli.html">Articoli & Interviste</a></li>
+            <li><a href="#chi-siamo">Chi Siamo</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+            
+            <!-- Separatore "A capo" -->
+            <li class="break"></li> 
+
+            <!-- Gruppo APP (Stile Accattivante) -->
+            <li><a href="mills.html" class="app-link"><i class="fas fa-calculator"></i> App Ticchiolatura</a></li>
+            <li><a href="peronospora.html" class="app-link"><i class="fas fa-leaf"></i> App Peronospora</a></li>
+            <li><a href="semina.html" class="app-link"><i class="fas fa-seedling"></i> App Semina</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section class="page-header">
+            <h1>Calcolatore Densità di Semina</h1>
+            <p>Calcola il numero di semi necessari e stima la resa del tuo campo.</p>
+            
+            <div class="tool-description">
+                <h3>Come funziona?</h3>
+                <p>
+                    Inserisci le distanze di semina e la dimensione del campo per calcolare il fabbisogno di semente.
+                    Puoi selezionare una coltura preimpostata per avere una stima della resa media, oppure inserire i tuoi dati personalizzati.
+                    Il grafico a lato ti darà una rappresentazione visiva della densità del tuo impianto.
+                </p>
+            </div>
+        </section>
+
+        <section class="mills-container">
+            
+            <!-- COLONNA SINISTRA: CALCOLATORE -->
+            <div class="calculator-box">
+                <h3>Dati di Semina</h3>
+                <form id="seminaForm">
+                    
+                    <!-- Selezione Coltura -->
+                    <div class="input-group">
+                        <label for="coltura"><i class="fas fa-seedling"></i> Seleziona Coltura (Preset)</label>
+                        <select id="coltura" onchange="aggiornaDatiColtura()">
+                            <option value="custom">Personalizzato</option>
+                            <option value="mais">Mais (Granella)</option>
+                            <option value="soia">Soia (I° raccolto)</option>
+                            <option value="girasole">Girasole</option>
+                            <option value="pomodoro">Pomodoro da industria</option>
+                            <option value="grano">Frumento Tenero</option>
+                        </select>
+                    </div>
+
+                    <!-- Dati Geometrici -->
+                    <div class="input-group">
+                        <label for="fila"><i class="fas fa-arrows-alt-h"></i> Distanza tra le file (m)</label>
+                        <input type="number" id="fila" placeholder="Es. 0.75" step="0.01" min="0.05" required oninput="calcolaTutto()">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pianta"><i class="fas fa-arrows-alt-v"></i> Distanza sulla fila (m)</label>
+                        <input type="number" id="pianta" placeholder="Es. 0.18" step="0.01" min="0.01" required oninput="calcolaTutto()">
+                    </div>
+
+                    <!-- Campo Ettari in Risalto (VERDE) -->
+                    <div class="input-group highlight-input">
+                        <label for="ettari"><i class="fas fa-map"></i> Superficie Campo (ha) - OBBLIGATORIO</label>
+                        <input type="number" id="ettari" placeholder="INSERISCI GLI ETTARI QUI" step="0.1" min="0.1" required oninput="calcolaTutto()">
+                    </div>
+
+                    <!-- Dati Produttivi -->
+                    <div class="input-group">
+                        <label for="resa_unitaria"><i class="fas fa-weight-hanging"></i> Resa stimata per pianta (kg)</label>
+                        <input type="number" id="resa_unitaria" placeholder="Es. 0.15" step="0.001" min="0.001" oninput="calcolaTutto()">
+                        <small style="color: #666;">Modificabile manualmente</small>
+                    </div>
+                </form>
+
+                <div id="risultato-semina" class="result-box hidden">
+                    <h4>Risultati:</h4>
+                    <p><strong>Investimento:</strong> <span id="piante-ha" style="color: var(--color-primary); font-size: 1.2rem;">0</span> piante/ha</p>
+                    <p><strong>Totale Semi/Piante:</strong> <span id="totale-semi" style="color: var(--color-primary); font-weight: bold;">0</span></p>
+                    <hr style="margin: 10px 0; border: 0; border-top: 1px solid #ddd;">
+                    <p><strong>Resa Totale Stimata:</strong> <span id="resa-totale" style="color: #d4b106; font-weight: bold; font-size: 1.4rem;">0</span> tonnellate</p>
+                </div>
+            </div>
+
+            <!-- COLONNA DESTRA: VISUALIZZAZIONE CAMPO -->
+            <div class="chart-box">
+                <h4 style="margin-bottom: 1rem; color: #555;">Densità Visiva (Campione 10m x 10m)</h4>
+                
+                <!-- Contenitore del campo -->
+                <div id="field-visualization" class="field-grid">
+                    <p style="color: #eee; margin-top: 40%; text-align: center; width: 100%;">Inserisci i dati per vedere l'anteprima</p>
+                </div>
+                
+                <div class="legend-field">
+                    <span class="dot-legend"></span> = 1 Pianta &nbsp;&nbsp; (Visualizzate <span id="counter-visual">0</span> piante su 100 m²)
+                </div>
+            </div>
+
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>AgroRealtà - Un progetto di divulgazione sull'agricoltura moderna.</p>
+            <div class="footer-links">
+                <a href="index.html#chi-siamo">Chi Siamo</a>
+                <a href="mailto:agrorealta@gmail.com">Contattaci via Email</a>
+            </div>
+            <div class="copyright">© 2025 AgroRealtà - Tutti i diritti riservati</div>
+        </div>
+    </footer>
+
+    <script>
+        // Dati agronomici realistici
+        const coltureData = {
+            'custom':   { resa: 0, fila: 0, pianta: 0 },
+            'mais':     { resa: 0.16, fila: 0.75, pianta: 0.18 },
+            'soia':     { resa: 0.012, fila: 0.45, pianta: 0.05 },
+            'girasole': { resa: 0.06, fila: 0.75, pianta: 0.25 },
+            'pomodoro': { resa: 2.8, fila: 1.5, pianta: 0.33 },
+            'grano':    { resa: 0.0015, fila: 0.15, pianta: 0.02 }
+        };
+
+        function aggiornaDatiColtura() {
+            const select = document.getElementById('coltura');
+            const val = select.value;
+            if (val !== 'custom') {
+                document.getElementById('resa_unitaria').value = coltureData[val].resa;
+                document.getElementById('fila').value = coltureData[val].fila;
+                document.getElementById('pianta').value = coltureData[val].pianta;
+                calcolaTutto();
+            } else {
+                document.getElementById('resa_unitaria').value = '';
+            }
+        }
+
+        function formatNumberIT(number, decimals = 0) {
+            return number.toLocaleString('it-IT', {
+                minimumFractionDigits: decimals,
+                maximumFractionDigits: decimals
+            });
+        }
+
+        function calcolaTutto() {
+            const fila = parseFloat(document.getElementById('fila').value);
+            const pianta = parseFloat(document.getElementById('pianta').value);
+            const ettari = parseFloat(document.getElementById('ettari').value);
+            const resaUnit = parseFloat(document.getElementById('resa_unitaria').value);
+
+            const resultBox = document.getElementById('risultato-semina');
+            const pianteHaEl = document.getElementById('piante-ha');
+            const totSemiEl = document.getElementById('totale-semi');
+            const resaTotEl = document.getElementById('resa-totale');
+            const fieldVis = document.getElementById('field-visualization');
+            const counterVisual = document.getElementById('counter-visual');
+
+            // Se manca la superficie, non calcolare
+            if (!fila || !pianta || !ettari) return;
+
+            // --- CALCOLI AGRONOMICI PRECISI ---
+            const superficieUnitaria = fila * pianta;
+            const piantePerHa = 10000 / superficieUnitaria;
+            const totalePiante = piantePerHa * ettari;
+
+            let resaTotale = 0;
+            if (resaUnit) resaTotale = (totalePiante * resaUnit) / 1000;
+
+            // Visualizzazione Numeri
+            resultBox.classList.remove('hidden');
+            pianteHaEl.innerText = formatNumberIT(piantePerHa);
+            totSemiEl.innerText = formatNumberIT(totalePiante);
+            resaTotEl.innerText = resaUnit ? formatNumberIT(resaTotale, 2) : "--";
+
+            // --- VISUALIZZAZIONE REALISTICA (10m x 10m) ---
+            fieldVis.innerHTML = ''; // Pulisci
+            
+            // Quante file intere ci stanno in 10 metri?
+            const numeroFileInDieciMetri = Math.floor(10.0 / fila);
+            // Quante piante intere ci stanno in 10 metri di fila?
+            const numeroPiantePerFila = Math.floor(10.0 / pianta);
+
+            const totalePallini = numeroFileInDieciMetri * numeroPiantePerFila;
+            counterVisual.innerText = formatNumberIT(totalePallini);
+
+            if (numeroFileInDieciMetri === 0) {
+                 const warning = document.createElement('p');
+                 warning.innerText = "Interfila > 10m (Nessuna fila intera in 100m²)";
+                 warning.style.color = "white";
+                 warning.style.textAlign = "center";
+                 warning.style.marginTop = "40%";
+                 fieldVis.appendChild(warning);
+                 return;
+            }
+
+            // Limite di sicurezza
+            let maxDots = 2500; 
+            let skipFactor = 1;
+            if (totalePallini > maxDots) {
+                skipFactor = Math.ceil(totalePallini / maxDots);
+            }
+
+            // Disegno delle file
+            for (let f = 0; f < numeroFileInDieciMetri; f++) {
+                const rowDiv = document.createElement('div');
+                rowDiv.classList.add('field-row');
+                
+                // Disegno delle piante nella fila
+                for (let p = 0; p < numeroPiantePerFila; p++) {
+                    if (p % skipFactor === 0) {
+                        const dot = document.createElement('div');
+                        dot.classList.add('plant-dot');
+                        if (skipFactor > 1) dot.style.width = dot.style.height = '4px';
+                        rowDiv.appendChild(dot);
+                    }
+                }
+                fieldVis.appendChild(rowDiv);
+            }
+        }
+    </script>
+</body>
+</html>
+```
+
+### 2. Aggiornamento CSS (Necessario per vedere le file separate)
+
+Devi sostituire il blocco `.field-row` nel tuo file `style.css` (o aggiungere questo in fondo se è più facile).
+
+**Il problema era:** `.field-row` aveva un'altezza fissa o mancava l'istruzione `flex: 1`. Senza `flex: 1`, le righe collassano.
+
+**Copia questo blocco e incollalo alla fine del tuo file `style.css`:**
+
+```css
+/* --- CORREZIONE VISUALIZZAZIONE RIGHE --- */
+

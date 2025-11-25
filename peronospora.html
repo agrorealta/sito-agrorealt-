@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolo Rischio Peronospora - AgroRealtà</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <img src="immagini/logo-icona.png" alt="Icona AgroRealtà" class="site-logo">
+            </a>
+            <h1 class="site-title">AgroRealtà</h1>
+            <div class="tagline">L’agricoltura com’è, non come l’immagini</div>
+        </div>
+    </header>
+    
+    <nav>
+        <ul>
+            <!-- Gruppo Principale -->
+            <li><a href="index.html">Home</a></li>
+            <li><a href="articoli.html">Articoli & Interviste</a></li>
+            <li><a href="#chi-siamo">Chi Siamo</a></li>
+            <li><a href="#contatti">Contatti</a></li>
+            
+            <!-- Separatore "A capo" -->
+            <li class="break"></li> 
+
+            <!-- Gruppo APP -->
+            <li><a href="mills.html" class="app-link"><i class="fas fa-calculator"></i> App Ticchiolatura</a></li>
+            <li><a href="peronospora.html" class="app-link"><i class="fas fa-leaf"></i> App Peronospora</a></li>
+            <li><a href="semina.html" class="app-link"><i class="fas fa-seedling"></i> App Semina</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <section class="page-header">
+            <h1>Rischio Peronospora della Vite</h1>
+            <p>Verifica le condizioni per l'infezione primaria secondo la "Regola dei Tre Dieci".</p>
+            
+            <div class="tool-description">
+                <h3>La Regola dei Tre Dieci</h3>
+                <p>
+                    La peronospora della vite (*Plasmopara viticola*) avvia il suo ciclo infettivo primario quando si verificano contemporaneamente tre condizioni ambientali e fenologiche specifiche. Usa questo strumento per verificare rapidamente se il tuo vigneto è a rischio infezione.
+                </p>
+            </div>
+        </section>
+
+        <section class="mills-container">
+            
+            <div class="calculator-box" style="max-width: 600px; margin: 0 auto;">
+                <h3>Inserisci Dati Vigneto</h3>
+                <form id="peronosporaForm">
+                    <div class="input-group">
+                        <label for="temp"><i class="fas fa-thermometer-half"></i> Temperatura Minima (°C)</label>
+                        <input type="number" id="temp" placeholder="Es. 12" step="0.1" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="pioggia"><i class="fas fa-cloud-showers-heavy"></i> Pioggia caduta (mm)</label>
+                        <input type="number" id="pioggia" placeholder="Es. 15" step="0.1" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="germogli"><i class="fas fa-seedling"></i> Lunghezza Germogli (cm)</label>
+                        <input type="number" id="germogli" placeholder="Es. 8" step="0.1" required>
+                    </div>
+
+                    <button type="button" class="cta-button full-width" onclick="calcolaPeronospora()">Verifica Rischio</button>
+                </form>
+
+                <div id="risultato-peronospora" class="result-box hidden" style="text-align: center;">
+                    <div id="icona-esito" style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h4 id="titolo-esito" style="font-size: 1.5rem; margin-bottom: 0.5rem;"></h4>
+                    <p id="descrizione-esito"></p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEZIONE ARTICOLO APRIBILE -->
+        <section class="content-section article-detail expandable-section">
+            <h2 onclick="toggleArticle()" class="expand-trigger">
+                Peronospora della Vite (<em>Plasmopara viticola</em>) <br>
+                <span class="expand-hint">(clicca per approfondire <i class="fas fa-chevron-down"></i>)</span>
+            </h2>
+            
+            <div id="info-peronospora" class="article-content-hidden">
+                <div class="article-text-block">
+                    <h3>Il Patogeno e il Ciclo Biologico</h3>
+                    <p>
+                        La peronospora è causata dall'oomicete <em>Plasmopara viticola</em>, un microrganismo originario del Nord America introdotto in Europa alla fine del XIX secolo. Non è un vero fungo, ma appartiene al regno dei Chromista, caratteristica che influenza la scelta dei principi attivi per la difesa.
+                    </p>
+                    <p>
+                        Il patogeno svernante nel terreno sotto forma di oospore (spore sessuate resistenti) riprende l'attività in primavera. Quando le condizioni ambientali sono favorevoli, le oospore germinano producendo macroconidi che liberano zoospore mobili in acqua. Queste raggiungono gli organi verdi della pianta tramite gli schizzi di pioggia, penetrano attraverso gli stomi e avviano l'<strong>infezione primaria</strong>.
+                    </p>
+
+                    <!-- IMMAGINE 1: Sintomi su foglia -->
+                    <div class="article-img-container">
+                        <img src="immagini/peronosporadannifoglia.jpg" alt="Sintomi di peronospora su foglia di vite" class="article-img">
+                        <p class="caption">Fig. 1 - Tipica "macchia d'olio" sulla pagina superiore della foglia.</p>
+                    </div>
+
+                    <h3>La Regola dei "Tre Dieci"</h3>
+                    <p>
+                        Per determinare il momento probabile dell'infezione primaria, si utilizza storicamente la regola empirica dei "Tre Dieci". L'infezione è ritenuta probabile solo quando si verificano contemporaneamente queste tre condizioni:
+                    </p>
+                    <!-- ELENCO ALLINEATO CORRETTAMENTE -->
+                    <ul style="text-align: left; margin-bottom: 1.5rem; padding-left: 2rem; line-height: 1.6;">
+                        <li><strong>Temperatura > 10°C:</strong> necessaria per la maturazione e la germinazione delle oospore.</li>
+                        <li><strong>Lunghezza germogli > 10 cm:</strong> indica che la pianta ha sviluppato stomi recettivi attraverso cui il patogeno può penetrare.</li>
+                        <li><strong>Pioggia > 10 mm:</strong> (nelle 24-48 ore) necessaria per bagnare il terreno e creare gli schizzi che trasportano le spore sulla vegetazione.</li>
+                    </ul>
+
+                    <h3>Sintomi e Danni</h3>
+                    <p>
+                        Sulle foglie, l'attacco si manifesta inizialmente con macchie clorotiche traslucide note come "macchie d'olio" sulla pagina superiore. In corrispondenza di queste, sulla pagina inferiore, compare una muffa bianca (evasioni conidiche) in condizioni di alta umidità.
+                    </p>
+                    <p>
+                        Sui grappoli, l'attacco è particolarmente grave. Se colpiti precocemente, i grappolini si curvano a uncino e si ricoprono di muffa bianca (forma larvata). Se colpiti più tardi, gli acini imbruniscono e dissecano (peronospora larvata o bruna), compromettendo totalmente la produzione.
+                    </p>
+
+                    <!-- IMMAGINE 2: Sintomi su uva -->
+                    <div class="article-img-container">
+                        <img src="immagini/peronosporadanniuva.jpg" alt="Danni da peronospora su grappolo d'uva" class="article-img">
+                        <p class="caption">Fig. 2 - Peronospora su grappolo: disseccamento e perdita del prodotto.</p>
+                    </div>
+
+                    <h3>Strategie di Difesa</h3>
+                    <p>
+                        La lotta alla peronospora è preventiva. L'uso di modelli previsionali permette di posizionare il primo trattamento solo al verificarsi delle condizioni reali di rischio, evitando trattamenti a calendario inutili. I prodotti utilizzati variano da quelli di copertura (come il rame) a quelli citotropici e sistemici, a seconda della fase fenologica e della pressione della malattia.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>AgroRealtà - Un progetto di divulgazione sull'agricoltura moderna.</p>
+            <div class="footer-links">
+                <a href="index.html#chi-siamo">Chi Siamo</a>
+                <a href="mailto:agrorealta@gmail.com">Contattaci via Email</a>
+            </div>
+            <div class="copyright">© 2025 AgroRealtà - Tutti i diritti riservati</div>
+        </div>
+    </footer>
+
+    <script>
+        // Funzione per aprire/chiudere l'articolo
+        function toggleArticle() {
+            const content = document.getElementById('info-peronospora');
+            const hint = document.querySelector('.expand-hint');
+            
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                hint.innerHTML = '(clicca per approfondire <i class="fas fa-chevron-down"></i>)';
+            } else {
+                content.style.display = "block";
+                hint.innerHTML = '(clicca per chiudere <i class="fas fa-chevron-up"></i>)';
+            }
+        }
+
+        function calcolaPeronospora() {
+            const temp = parseFloat(document.getElementById('temp').value);
+            const pioggia = parseFloat(document.getElementById('pioggia').value);
+            const germogli = parseFloat(document.getElementById('germogli').value);
+            
+            const resultBox = document.getElementById('risultato-peronospora');
+            const icona = document.getElementById('icona-esito');
+            const titolo = document.getElementById('titolo-esito');
+            const desc = document.getElementById('descrizione-esito');
+
+            if (isNaN(temp) || isNaN(pioggia) || isNaN(germogli)) {
+                alert("Inserisci tutti i dati correttamente.");
+                return;
+            }
+
+            // Logica dei 3-10
+            let condizioniMancanti = [];
+            if (temp < 10) condizioniMancanti.push("Temperatura insufficiente (< 10°C)");
+            if (pioggia < 10) condizioniMancanti.push("Pioggia insufficiente (< 10mm)");
+            if (germogli < 10) condizioniMancanti.push("Germogli troppo corti (< 10cm)");
+
+            resultBox.classList.remove('hidden');
+
+            if (condizioniMancanti.length === 0) {
+                // RISCHIO ALTO
+                resultBox.style.borderLeft = "5px solid #DC143C";
+                resultBox.style.backgroundColor = "#fff5f5";
+                icona.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: #DC143C;"></i>';
+                titolo.innerHTML = "RISCHIO INFEZIONE PRIMARIA";
+                titolo.style.color = "#DC143C";
+                desc.innerHTML = "Tutte le condizioni della regola dei 3-10 sono soddisfatte. È probabile che le oospore abbiano germinato avviando l'infezione primaria. Monitorare attentamente e valutare un trattamento preventivo.";
+            } else {
+                // RISCHIO BASSO
+                resultBox.style.borderLeft = "5px solid #2c5f34";
+                resultBox.style.backgroundColor = "#f0fdf4";
+                icona.innerHTML = '<i class="fas fa-check-circle" style="color: #2c5f34;"></i>';
+                titolo.innerHTML = "RISCHIO BASSO";
+                titolo.style.color = "#2c5f34";
+                desc.innerHTML = "Le condizioni per l'infezione primaria NON sono soddisfatte.<br><br><strong>Fattori limitanti:</strong><br>" + condizioniMancanti.join("<br>");
+            }
+        }
+    </script>
+</body>
+</html>
