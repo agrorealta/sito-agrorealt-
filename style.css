@@ -269,17 +269,57 @@ footer { background-color: var(--color-secondary); color: white; text-align: cen
 .legend-field { margin-top: 10px; font-size: 0.9rem; color: #666; display: flex; align-items: center; gap: 5px; }
 .dot-legend { width: 8px; height: 8px; background-color: #4caf50; border-radius: 50%; display: inline-block; }
 
-/* --- Articoli Espandibili (Ticchiolatura/Peronospora) --- */
-.article-detail { max-width: 950px; margin: 4rem auto; padding: 0 1rem; }
-.expand-trigger { cursor: pointer; color: var(--color-primary); text-align: center; margin-bottom: 2rem; transition: color 0.3s; }
-.expand-trigger:hover { color: var(--color-secondary); }
-.expand-hint { display: block; font-size: 1rem; font-weight: normal; color: #666; margin-top: 0.5rem; text-decoration: underline; }
-.article-content-hidden { display: none; animation: fadeIn 0.5s ease-in-out; }
-.article-img-container { text-align: center; margin: 2rem 0; }
-.article-img { max-width: 70%; height: auto; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.15); margin-bottom: 0.5rem; }
-.caption { font-size: 0.9rem; color: #666; font-style: italic; }
+/* --- Articoli Espandibili (Stile Evidente) --- */
+.article-detail {
+    max-width: 950px;
+    margin: 4rem auto;
+    padding: 0 1rem;
+}
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+/* Il contenitore del titolo cliccabile diventa un bottone evidente */
+.expand-trigger {
+    cursor: pointer;
+    background-color: #f0fdf4; /* Sfondo verde molto chiaro */
+    border: 2px solid var(--color-primary); /* Bordo verde scuro */
+    color: var(--color-primary);
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.expand-trigger:hover {
+    background-color: var(--color-primary); /* Diventa verde scuro al passaggio */
+    color: white; /* Testo bianco */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* La scritta "clicca per maggiori informazioni" */
+.expand-hint {
+    display: block;
+    font-size: 1.1rem; /* Testo più grande */
+    font-weight: bold; /* Grassetto */
+    margin-top: 0.5rem;
+    text-decoration: none; /* Tolta la sottolineatura classica */
+    text-transform: uppercase; /* Maiuscolo per attirare l'attenzione */
+    letter-spacing: 1px;
+}
+
+/* Freccia animata */
+.expand-trigger:hover .expand-hint i {
+    transform: translateY(3px); /* La freccia si muove giù quando passi sopra */
+}
+
+/* Contenuto nascosto */
+.article-content-hidden {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+    padding: 1rem;
+    border-top: 1px solid #eee; /* Linea di separazione */
+}
 
 /* --- Responsività Mobile --- */
 @media (max-width: 960px) {
@@ -545,3 +585,15 @@ select {
     }
 }
 
+/* --- Fix Spaziatura Footer --- */
+main {
+    /* Aumentiamo il padding inferiore per staccare il footer dal contenuto */
+    padding-bottom: 6rem; 
+    min-height: 80vh; /* Assicura che la pagina sia abbastanza lunga */
+}
+
+/* Assicuriamoci che il footer sia sempre ben distanziato */
+footer {
+    margin-top: auto; 
+    border-top: 5px solid var(--color-primary); /* Linea verde sopra il footer per stacco visivo */
+}
